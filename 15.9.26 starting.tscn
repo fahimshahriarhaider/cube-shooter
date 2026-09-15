@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://bp55y5kivq2vp"]
+
+[ext_resource type="Script" uid="uid://cr2jqe7p6t8lt" path="res://player.gd" id="1_5ee8h"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_atgqu"]
+albedo_color = Color(0.7529412, 0.7529412, 0.7529412, 1)
+
+[sub_resource type="Environment" id="Environment_ikxty"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_imo3k"]
+size = Vector3(1, 2, 1)
+
+[node name="Node3D" type="Node3D" unique_id=1995195892]
+
+[node name="Floor" type="CSGBox3D" parent="." unique_id=646828343]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+use_collision = true
+size = Vector3(20, 1, 20)
+material = SubResource("StandardMaterial3D_atgqu")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=234899231]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=30347885]
+environment = SubResource("Environment_ikxty")
+
+[node name="Player" type="CharacterBody3D" parent="WorldEnvironment" unique_id=1119677981]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+script = ExtResource("1_5ee8h")
+
+[node name="Camera3D" type="Camera3D" parent="WorldEnvironment/Player" unique_id=566058349]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/Player" unique_id=929872919]
+shape = SubResource("BoxShape3D_imo3k")
+debug_color = Color(0.34057444, 0.5736324, 0.63864857, 0.41960785)
+
+[node name="Wall" type="CSGBox3D" parent="." unique_id=1374752344]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -10)
+use_collision = true
+size = Vector3(20, 5, 1)
+
+[node name="Wall2" type="CSGBox3D" parent="." unique_id=2050907627]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 10)
+use_collision = true
+size = Vector3(20, 5, 1)
+
+[node name="Wall3" type="CSGBox3D" parent="." unique_id=1835787095]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 2.5, 0)
+use_collision = true
+size = Vector3(1, 5, 20)
+
+[node name="Wall4" type="CSGBox3D" parent="." unique_id=1974958673]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2.5, 0)
+use_collision = true
+size = Vector3(1, 5, 20)
