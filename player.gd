@@ -14,6 +14,10 @@ func _unhandled_input(event):
 		rotate_y(-event.relative.x * mouse_sensitivity)
 		$Camera3D.rotate_x(-event.relative.y * mouse_sensitivity)
 		$Camera3D.rotation.x = clamp($Camera3D.rotation.x, -1.5, 1.5)
+	
+	if event is InputEventMouseButton and event.pressed:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			shoot()
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -33,3 +37,10 @@ func _physics_process(delta):
 		velocity.z = move_toward(velocity.z, 0, speed)
 	
 	move_and_slide()
+
+func shoot():
+	if $Camera3D/RayCast3D.is_colliding():
+		var target = $Camera3D/RayCast3D.get_collider()
+		print("Hit: ", target.name)
+	else:
+		print("Missed!")

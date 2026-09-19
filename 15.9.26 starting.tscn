@@ -7,8 +7,13 @@ albedo_color = Color(0.7529412, 0.7529412, 0.7529412, 1)
 
 [sub_resource type="Environment" id="Environment_ikxty"]
 
+[sub_resource type="BoxMesh" id="BoxMesh_lsik4"]
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_imo3k"]
 size = Vector3(1, 2, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_atgqu"]
+font_size = 40
 
 [node name="Node3D" type="Node3D" unique_id=1995195892]
 
@@ -30,6 +35,13 @@ script = ExtResource("1_5ee8h")
 
 [node name="Camera3D" type="Camera3D" parent="WorldEnvironment/Player" unique_id=566058349]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="Gun" type="MeshInstance3D" parent="WorldEnvironment/Player/Camera3D" unique_id=1353647102]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.5, 0.3, -0.2, -0.5)
+mesh = SubResource("BoxMesh_lsik4")
+
+[node name="RayCast3D" type="RayCast3D" parent="WorldEnvironment/Player/Camera3D" unique_id=1996099507]
+target_position = Vector3(0, 0, -50)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/Player" unique_id=929872919]
 shape = SubResource("BoxShape3D_imo3k")
@@ -54,3 +66,30 @@ size = Vector3(1, 5, 20)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2.5, 0)
 use_collision = true
 size = Vector3(1, 5, 20)
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=196078632]
+
+[node name="HUD" type="Control" parent="UI" unique_id=424355822]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="UI/HUD" unique_id=1548359927]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -27.5
+offset_right = 20.0
+offset_bottom = 27.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "+"
+label_settings = SubResource("LabelSettings_atgqu")
