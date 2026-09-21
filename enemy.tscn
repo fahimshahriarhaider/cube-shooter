@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://6h4mc06c3brd"]
+
+[ext_resource type="Script" uid="uid://r2tqyxaijj2w" path="res://enemy.gd" id="1_7k104"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lsik4"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_lsik4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_atgqu"]
+albedo_color = Color(1, 0, 0, 1)
+
+[node name="Enemy" type="CharacterBody3D" unique_id=2008595821]
+script = ExtResource("1_7k104")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=159179366]
+shape = SubResource("BoxShape3D_lsik4")
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=246928094]
+mesh = SubResource("BoxMesh_lsik4")
+surface_material_override/0 = SubResource("StandardMaterial3D_atgqu")

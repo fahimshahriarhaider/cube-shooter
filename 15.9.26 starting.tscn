@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://bp55y5kivq2vp"]
 
 [ext_resource type="Script" uid="uid://cr2jqe7p6t8lt" path="res://player.gd" id="1_5ee8h"]
+[ext_resource type="PackedScene" uid="uid://6h4mc06c3brd" path="res://enemy.tscn" id="2_6si1c"]
+[ext_resource type="Script" uid="uid://cr65oq5ewx5tm" path="res://spawner.gd" id="3_imo3k"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_atgqu"]
 albedo_color = Color(0.7529412, 0.7529412, 0.7529412, 1)
@@ -14,6 +16,17 @@ size = Vector3(1, 2, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_atgqu"]
 font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_muxy1"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_25vex"]
+font_size = 30
+font_color = Color(1, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_q7xgb"]
+font_size = 60
+font_color = Color(1, 0, 0, 1)
 
 [node name="Node3D" type="Node3D" unique_id=1995195892]
 
@@ -41,6 +54,7 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.5, 0.3, -0.2, -0.5)
 mesh = SubResource("BoxMesh_lsik4")
 
 [node name="RayCast3D" type="RayCast3D" parent="WorldEnvironment/Player/Camera3D" unique_id=1996099507]
+exclude_parent = false
 target_position = Vector3(0, 0, -50)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/Player" unique_id=929872919]
@@ -93,3 +107,40 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "+"
 label_settings = SubResource("LabelSettings_atgqu")
+
+[node name="ScoreLabel" type="Label" parent="UI/HUD" unique_id=514137589]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 60.0
+offset_bottom = 43.0
+text = "0"
+label_settings = SubResource("LabelSettings_muxy1")
+
+[node name="HealthLabel" type="Label" parent="UI/HUD" unique_id=1717879390]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+offset_transform_enabled = true
+offset_transform_position = Vector2(20, 60)
+offset_transform_position_ratio = Vector2(0.5, 0.5)
+text = "Health: 3"
+label_settings = SubResource("LabelSettings_25vex")
+
+[node name="GameOverLabel" type="Label" parent="UI/HUD" unique_id=527762192]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+offset_transform_enabled = true
+offset_transform_position = Vector2(480, 300)
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_q7xgb")
+
+[node name="Spawner" type="Node3D" parent="." unique_id=1225244940]
+script = ExtResource("3_imo3k")
+enemy_scene = ExtResource("2_6si1c")
+
+[node name="SpawnTimer" type="Timer" parent="Spawner" unique_id=141551101]
+wait_time = 3.0
+autostart = true

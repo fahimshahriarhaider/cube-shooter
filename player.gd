@@ -5,9 +5,13 @@ extends CharacterBody3D
 @export var jump_velocity = 4.5
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+var score = 0
+var health = 3
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	add_to_group("player")
+	$Camera3D/RayCast3D.add_exception(self)
 
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
@@ -39,8 +43,30 @@ func _physics_process(delta):
 	move_and_slide()
 
 func shoot():
+	$Camera3D/RayCast3D.force_raycast_update()
 	if $Camera3D/RayCast3D.is_colliding():
 		var target = $Camera3D/RayCast3D.get_collider()
 		print("Hit: ", target.name)
+		if target.is_in_group("enemies"):
+			target.die()
+			score += 1
+			var label = get_tree().current_scene.find_child("ScoreLabel", true, false)
+			if label:
+				label.text = "Score: " + str(score)
 	else:
 		print("Missed!")
+
+func take_damage():
+	health -= 1
+	var label = get_tree().current_scene.find_child("HealthLabel", true, false)
+	if label:
+		label.text = "Health: " + str(health)
+	if health <= 0:
+		end_game()
+
+func end_game():
+	var game_over_label = get_tree().current_scene.find_child("GameOverLabel", true, false)
+	if game_over_label:
+		game_over_label.visible = true
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	get_tree().paused = true
