@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+const EXPLOSION = preload("res://explosion.tscn")
+
 var speed = 2.0
 var player = null
 
@@ -13,10 +15,12 @@ func _physics_process(delta):
 		velocity = direction * speed
 		move_and_slide()
 		
-		# If we touch the player, deal 1 damage and disappear
 		if global_position.distance_to(player.global_position) < 1.5:
 			player.take_damage()
-			queue_free()
+			die()
 
 func die():
+	var boom = EXPLOSION.instantiate()
+	boom.global_position = global_position
+	get_parent().add_child(boom)
 	queue_free()
