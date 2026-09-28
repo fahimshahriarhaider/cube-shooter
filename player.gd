@@ -68,5 +68,8 @@ func end_game():
 	var game_over_label = get_tree().current_scene.find_child("GameOverLabel", true, false)
 	if game_over_label:
 		game_over_label.visible = true
+	var restart_button = get_tree().current_scene.find_child("RestartButton", true, false)
+	if restart_button:
+		restart_button.visible = true
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	get_tree().paused = true

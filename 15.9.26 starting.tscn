@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cr2jqe7p6t8lt" path="res://player.gd" id="1_5ee8h"]
 [ext_resource type="PackedScene" uid="uid://6h4mc06c3brd" path="res://enemy.tscn" id="2_6si1c"]
+[ext_resource type="Script" uid="uid://bo76bdlox5058" path="res://restart_button.gd" id="2_s0xq3"]
 [ext_resource type="Script" uid="uid://cr65oq5ewx5tm" path="res://spawner.gd" id="3_imo3k"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_atgqu"]
@@ -130,12 +131,26 @@ label_settings = SubResource("LabelSettings_25vex")
 [node name="GameOverLabel" type="Label" parent="UI/HUD" unique_id=527762192]
 visible = false
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-offset_transform_enabled = true
+offset_left = 405.0
+offset_top = 240.0
+offset_right = 749.0
+offset_bottom = 323.0
 offset_transform_position = Vector2(480, 300)
 text = "GAME OVER"
 label_settings = SubResource("LabelSettings_q7xgb")
+
+[node name="RestartButton" type="Button" parent="UI/HUD" unique_id=1409396317]
+process_mode = 3
+visible = false
+custom_minimum_size = Vector2(350, 80)
+layout_mode = 0
+offset_left = 400.0
+offset_top = 320.0
+offset_right = 750.0
+offset_bottom = 400.0
+theme_override_font_sizes/font_size = 50
+text = "PLAY AGAIN"
+script = ExtResource("2_s0xq3")
 
 [node name="Spawner" type="Node3D" parent="." unique_id=1225244940]
 script = ExtResource("3_imo3k")
