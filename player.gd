@@ -12,6 +12,15 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	add_to_group("player")
 	$Camera3D/RayCast3D.add_exception(self)
+	var high_score = 0
+	if FileAccess.file_exists("user://highscore.save"):
+		var f = FileAccess.open("user://highscore.save", FileAccess.READ)
+		if f:
+			high_score = f.get_var()
+			f.close()
+	var label = get_tree().current_scene.find_child("LiveHighScoreLabel", true, false)
+	if label:
+		label.text = "High Score: " + str(high_score)
 
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
@@ -65,11 +74,26 @@ func take_damage():
 		end_game()
 
 func end_game():
+	var high_score = 0
+	if FileAccess.file_exists("user://highscore.save"):
+		var f = FileAccess.open("user://highscore.save", FileAccess.READ)
+		if f:
+			high_score = f.get_var()
+			f.close()
+	if score > high_score:
+		var f2 = FileAccess.open("user://highscore.save", FileAccess.WRITE)
+		if f2:
+			f2.store_var(score)
+			f2.close()
+	
 	var game_over_label = get_tree().current_scene.find_child("GameOverLabel", true, false)
 	if game_over_label:
 		game_over_label.visible = true
 	var restart_button = get_tree().current_scene.find_child("RestartButton", true, false)
 	if restart_button:
 		restart_button.visible = true
+	var menu_button = get_tree().current_scene.find_child("MainMenuButton", true, false)
+	if menu_button:
+		menu_button.visible = true
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	get_tree().paused = true

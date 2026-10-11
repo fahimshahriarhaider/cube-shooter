@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://1wj7g046mjfy"]
+
+[ext_resource type="Script" uid="uid://dawuxb6a5haj" path="res://menu.gd" id="1_lti8b"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_lsik4"]
+font_size = 80
+
+[sub_resource type="LabelSettings" id="LabelSettings_atgqu"]
+font_size = 40
+font_color = Color(1, 0.8666667, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_muxy1"]
+font_size = 20
+font_color = Color(0.6666667, 0.6666667, 0.6666667, 1)
+
+[node name="Menu" type="Control" unique_id=93434977]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lti8b")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=143577106]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.101960786, 0.101960786, 0.101960786, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=717850914]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1341152686]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer" unique_id=711369188]
+layout_mode = 2
+text = "CUBE SHOOTER
+"
+label_settings = SubResource("LabelSettings_lsik4")
+
+[node name="HighScoreLabel" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1211675130]
+layout_mode = 2
+text = "High Score: 0"
+label_settings = SubResource("LabelSettings_atgqu")
+
+[node name="PlayButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1149828991]
+custom_minimum_size = Vector2(300, 80)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "START GAME"
+
+[node name="InstructionsLabel" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1818516469]
+layout_mode = 2
+text = "WASD to move | Mouse to look | Click to shoot"
+label_settings = SubResource("LabelSettings_muxy1")
+
+[node name="ExitButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=2107284523]
+custom_minimum_size = Vector2(300, 80)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "EXIT"
